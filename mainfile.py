@@ -38,4 +38,32 @@ def down(matrix):
     print(matrix)
 
 
+def left(matrix):
+    for k in range(4):
+        for j in range(1,4):
+            for i in range(4):
+                if matrix[i][j]==matrix[i][j-1]:
+                    matrix[i][j-1]+=matrix[i][j]
+                    matrix[i][j]=0
+                if matrix[i][j-1]==0:
+                    matrix[i][j-1]=matrix[i][j]
+                    matrix[i][j]=0
+    r_put(matrix)
+    print(matrix)
+
+
+def right(matrix):
+    for k in range(4):
+        for j in range(2,-1,-1):
+            for i in range(4):
+                if matrix[i][j]==matrix[i][j+1]:
+                    matrix[i][j+1]+=matrix[i][j]
+                    matrix[i][j]=0
+                if matrix[i][j+1]==0:
+                    matrix[i][j+1]=matrix[i][j]
+                    matrix[i][j]=0
+    r_put(matrix)
+    print(matrix)
+
+
 matrix = [[0 for i in range(4)] for i in range(4)]
