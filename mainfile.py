@@ -1,10 +1,10 @@
 import random
-
+import numpy as np
 class game:
-    
     def __init__(self):
         self.matrix = [[0 for i in range(4)] for i in range(4)]
     
+   
     # puts 2 at a random unoccupied space
     def r_put(self):
         while(1):
@@ -14,79 +14,88 @@ class game:
                 self.matrix[a][b] = 2
                 break
 
-
-def up(self):
-    for k in range(4):
-        for i in range(1,4):
-            for j in range(4):
-                if self.matrix[i][j]==self.matrix[i-1][j]:
-                    self.matrix[i-1][j]+=self.matrix[i][j]
+    def up(self):
+        for k in range(4):
+            for i in range(1,4):
+                for j in range(4):
+                    if self.matrix[i][j]==self.matrix[i-1][j]:
+                        self.matrix[i-1][j]+=self.matrix[i][j]
                         self.matrix[i][j]=0
                     if self.matrix[i-1][j]==0:
                         self.matrix[i-1][j]=self.matrix[i][j]
                         self.matrix[i][j]=0
-    r_put()
-        print(self.matrix)
+        self.r_put()
+        print(np.matrix(self.matrix))
 
-
-def down(self):
-    for k in range(4):
-        for i in range(2,-1,-1):
-            for j in range(4):
-                if self.matrix[i][j]==self.matrix[i+1][j]:
-                    self.matrix[i+1][j]+=self.matrix[i][j]
+    def down(self):
+        for k in range(4):
+            for i in range(2,-1,-1):
+                for j in range(4):
+                    if self.matrix[i][j]==self.matrix[i+1][j]:
+                        self.matrix[i+1][j]+=self.matrix[i][j]
                         self.matrix[i][j]=0
                     if self.matrix[i+1][j]==0:
                         self.matrix[i+1][j]=self.matrix[i][j]
                         self.matrix[i][j]=0
-    r_put()
-        print(self.matrix)
+        self.r_put()
+        print(np.matrix(self.matrix))
 
 
-def left(self):
-    for k in range(4):
-        for j in range(1,4):
-            for i in range(4):
-                if self.matrix[i][j]==self.matrix[i][j-1]:
-                    self.matrix[i][j-1]+=self.matrix[i][j]
+    def left(self):
+        for k in range(4):
+            for j in range(1,4):
+                for i in range(4):
+                    if self.matrix[i][j]==self.matrix[i][j-1]:
+                        self.matrix[i][j-1]+=self.matrix[i][j]
                         self.matrix[i][j]=0
                     if self.matrix[i][j-1]==0:
                         self.matrix[i][j-1]=self.matrix[i][j]
                         self.matrix[i][j]=0
-    r_put()
-        print(self.matrix)
+        self.r_put()
+        print(np.matrix(self.matrix))
 
 
-def right(self):
-    for k in range(4):
-        for j in range(2,-1,-1):
-            for i in range(4):
-                if self.matrix[i][j]==self.matrix[i][j+1]:
-                    self.matrix[i][j+1]+=self.matrix[i][j]
+    def right(self):
+        for k in range(4):
+            for j in range(2,-1,-1):
+                for i in range(4):
+                    if self.matrix[i][j]==self.matrix[i][j+1]:
+                        self.matrix[i][j+1]+=self.matrix[i][j]
                         self.matrix[i][j]=0
                     if self.matrix[i][j+1]==0:
                         self.matrix[i][j+1]=self.matrix[i][j]
                         self.matrix[i][j]=0
-    r_put(self.matrix)
-        print(self.matrix)
+        self.r_put()
+        print(np.matrix(self.matrix))
 
 
-def play(self):
-    r_put(self.matrix)
-        r_put(self.matrix)
-        print(self.matrix)
+    def play(self):
+        self.r_put()
+        self.r_put()
+        print(np.matrix(self.matrix))
         while(1):
             a = input()
             if a=='w':
-                up(self.matrix)
+                self.up()
             if a=='a':
-                left(self.matrix)
+                self.left()
             if a=='s':
-                down(self.matrix)
+                self.down()
             if a=='d':
-                right(self.matrix)
+                self.right()
             if a=='q':
                 break
+            if self.check_end():
+                print("You Lost!")
+                break
+    
+    def check_end(self):
+        a=1
+        for i in range(4):
+            for j in range(4):
+                if self.matrix[i][j]==0:
+                    a=0
+        return a
 
 G = game()
 G.play()
